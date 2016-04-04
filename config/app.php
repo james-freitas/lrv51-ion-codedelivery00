@@ -142,6 +142,7 @@ return [
          * Repositories
          */
         Bestmomo\Scafold\ScafoldServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
 
         /*
