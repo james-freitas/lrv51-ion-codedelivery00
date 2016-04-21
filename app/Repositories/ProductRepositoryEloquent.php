@@ -32,4 +32,9 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function lists($column, $key = NULL)
+    {
+        return $this->model->lists('name','id');
+    }
 }

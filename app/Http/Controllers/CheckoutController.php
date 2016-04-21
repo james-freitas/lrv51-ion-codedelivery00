@@ -34,4 +34,11 @@ class CheckoutController extends Controller
         $this->productRepository = $productRepository;
     }
 
+    public function create()
+    {
+        $products = $this->productRepository->lists('name','id');
+        return view('customer.order.create', compact('products'));
+    }
+
+
 }
