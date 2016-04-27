@@ -49,5 +49,7 @@ class OrdersController extends Controller
 
         return redirect()->route('admin.orders.index');
     }
+    
+    
 
 }
