@@ -12,6 +12,7 @@ use CodeDelivery\Models\Order;
 class OrderTransformer extends TransformerAbstract
 {
 
+    //protected $defaultIncludes=['cupom'];
     protected $availableIncludes = ['cupom', 'items', 'client'];
 
     /**
@@ -38,7 +39,7 @@ class OrderTransformer extends TransformerAbstract
     }
 
     public function includeCupom(Order $model){
-        if(!$model->cupom()){
+        if(!$model->cupom){
             return null;
         }
         return $this->item($model->cupom, new CupomTransformer());
