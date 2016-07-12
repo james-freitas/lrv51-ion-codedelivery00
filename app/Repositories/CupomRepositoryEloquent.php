@@ -16,6 +16,8 @@ use CodeDelivery\Presenters\CupomPresenter;
  */
 class CupomRepositoryEloquent extends BaseRepository implements CupomRepository
 {
+    
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *
