@@ -78,7 +78,7 @@ angular.module('starter', [
             })
             .state('client.checkout_item_detail', {
                 url: '/checkout/detail/:index',
-                templateUrl: 'templates/client/chekout_item_detail.html',
+                templateUrl: 'templates/client/checkout_item_detail.html',
                 controler: 'ClientCheckoutDetailCtrl'
             })
 

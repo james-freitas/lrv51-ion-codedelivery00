@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-    .controller('ClientCheckoutCtrl', [
+    .controller('ClientCheckoutSuccessfulCtrl', [
         '$scope', '$state', '$cart', 
         function($scope, $state, $cart){
 
