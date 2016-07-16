@@ -3,7 +3,9 @@ angular.module('starter.controllers')
         '$scope', '$state', '$cart', 'Order', '$ionicLoading', '$ionicPopup','Cupom',
         function($scope, $state, $cart, Order, $ionicLoading, $ionicPopup, Cupom){
             Cupom.get({code: 7434}, function(data){
-                console.log(data);
+                $cart.setCupom(data.data.code, data.data.value);
+                console.log($cart.getTotalFinal());
+
             }, function (responseError) {
 
             });
