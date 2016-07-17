@@ -4,7 +4,10 @@
         <h2 class="title">Total: R$ {{total}}</h2>
     </div>
     <ion-content class="padding has-subheader">
-
+            <ion-item class="item-dark" ng-show="cupom.value != null">
+                <strong>Cupom</strong>
+                <span class="badge badge-dark">- R$ {{cupom.value}}</span>
+            </ion-item>
             <ion-item ng-repeat="o in items">
                 <h2>{{o.name}}</h2>
                 <div class="row">
