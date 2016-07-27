@@ -6,9 +6,11 @@
 
 angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
+angular.module('starter.filters', []);
 
 angular.module('starter', [
-    'ionic', 'starter.controllers', 'starter.services', 'angular-oauth2', 'ngResource', 'ngCordova'
+    'ionic', 'starter.controllers', 'starter.services','starter.filters',
+    'angular-oauth2', 'ngResource', 'ngCordova'
 ])
     .constant('appConfig', {
         baseUrl: 'http://192.168.0.6:8000'
@@ -68,7 +70,14 @@ angular.module('starter', [
             .state('client', {
                 abstract: true,
                 url: '/client',
-                template: '<ion-nav-view/>'
+                templateUrl: 'templates/client/menu.html',
+                controller: 'ClientMenuCtrl'
+            })
+
+            .state('client.order', {
+                url: '/order',
+                templateUrl: 'templates/client/order.html',
+                controller: 'ClientOrderCtrl'
             })
 
             .state('client.checkout', {

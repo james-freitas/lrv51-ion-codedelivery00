@@ -4,7 +4,7 @@ namespace CodeDelivery\Http\Controllers\Api;
 
 use CodeDelivery\Http\Controllers\Controller;
 use CodeDelivery\Repositories\UserRepository;
-use LucaDegasperi\OAuth2Server\Authorizer;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 
 class UserController extends Controller
@@ -22,7 +22,7 @@ class UserController extends Controller
     public function authenticated()
     {
         $id = Authorizer::getResourceOwnerId();
-        return $this->userRepository->skipPresenter(false)->find(id);
+        return $this->userRepository->skipPresenter(false)->find($id);
     }
 
 
