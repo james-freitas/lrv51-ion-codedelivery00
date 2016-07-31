@@ -1,8 +1,9 @@
 <ion-view>
     <ion-nav-title>Meus pedidos</ion-nav-title>
     <ion-content class="padding has-header">
+        <ion-refresher pulling-text="Puxe para atualizar..." on-refresh="doRefresh()"></ion-refresher>
         <ion-list>
-            <ion-item ng-repeat="o in items">
+            <ion-item ng-repeat="o in items" ng-click="openOrderDetail(o)">
                 <div class="row">
                     <div class="col">
                         <h2>{{o.created_at.date|limitTo: 10|date: 'dd/MM/yyyy'}}</h2>

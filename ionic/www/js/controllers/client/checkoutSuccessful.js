@@ -8,6 +8,6 @@ angular.module('starter.controllers')
             $scope.total = $cart.getTotalFinal();
             $cart.clear();
             $scope.openListOrder = function() {
-
+                $state.go('client.order');
             };
         }]);
