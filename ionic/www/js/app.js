@@ -69,6 +69,7 @@ angular.module('starter', [
 
             .state('client', {
                 abstract: true,
+                cache: false,
                 url: '/client',
                 templateUrl: 'templates/client/menu.html',
                 controller: 'ClientMenuCtrl'
@@ -106,6 +107,24 @@ angular.module('starter', [
                 url: '/view_products',
                 templateUrl: 'templates/client/view_products.html',
                 controller: 'ClientViewProductCtrl'
+            })
+            .state('deliveryman', {
+                abstract: true,
+                cache: false,
+                url: '/deliveryman',
+                templateUrl: 'templates/deliveryman/menu.html',
+                controller: 'DeliverymanMenuCtrl'
+            })
+            .state('deliveryman.order', {
+                url: '/order',
+                templateUrl: 'templates/deliveryman/order.html',
+                controller: 'DeliverymanOrderCtrl'
+            })
+            .state('deliveryman.view_order', {
+                cache: false,
+                url: '/view_order/:id',
+                templateUrl: 'templates/deliveryman/view_order.html',
+                controller: 'DeliverymanViewOrderCtrl'
             });
 
         $urlRouterProvider.otherwise('/login');

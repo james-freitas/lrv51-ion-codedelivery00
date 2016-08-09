@@ -1,8 +1,9 @@
 angular.module('starter.controllers')
-    .controller('ClientMenuCtrl', [
+    .controller('DeliverymanMenuCtrl', [
         '$scope', '$state', '$ionicLoading', 'UserData',
         function ($scope, $state, $ionicLoading, UserData) {
             $scope.user = UserData.get();
+
         }]);
 
 
