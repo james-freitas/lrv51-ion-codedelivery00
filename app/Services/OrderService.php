@@ -70,9 +70,9 @@ class OrderService
         }
     }
 
-    public function updateStatus($id,$idDeliveryman, $status)
+    public function updateStatus($id, $idDeliveryman, $status)
     {
-        $order = $this->orderRepository->getByIdAndDeliveryman($id,$idDeliveryman);
+        $order = $this->orderRepository->getByIdAndDeliveryman($id, $idDeliveryman);
         $order->status = $status;
         if((int)($order->status) == 1 && !$order->hash){
             $order->hash = md5((new \DateTime())->getTimestamp());
