@@ -10,14 +10,16 @@ angular.module('starter.filters', []);
 
 angular.module('starter', [
     'ionic', 'starter.controllers', 'starter.services','starter.filters',
-    'angular-oauth2', 'ngResource', 'ngCordova', 'uiGmapgoogle-maps'
+    'angular-oauth2', 'ngResource', 'ngCordova', 'uiGmapgoogle-maps', 'pusher-angular'
 ])
     .constant('appConfig', {
-        baseUrl: 'http://192.168.0.7:8000'
+        baseUrl: 'http://192.168.0.7:8000',
+        pusherKey: 'dba8be110fed62cabe69'
+
         //baseUrl: 'http://localhost:8000'
     }) // 192.168.0.6
-    .run(function ($ionicPlatform) {
-
+    .run(function ($ionicPlatform, $window, appConfig) {
+        $window.client = new Pusher(appConfig.pusherKey);
 
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
