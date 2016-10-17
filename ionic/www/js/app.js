@@ -9,16 +9,15 @@ angular.module('starter.services',[]);
 angular.module('starter.filters', []);
 
 angular.module('starter', [
-    'ionic', 'starter.controllers', 'starter.services','starter.filters',
+    'ionic','ionic.service.core', 'starter.controllers', 'starter.services','starter.filters',
     'angular-oauth2', 'ngResource', 'ngCordova', 'uiGmapgoogle-maps', 'pusher-angular'
 ])
     .constant('appConfig', {
-        baseUrl: 'http://192.168.0.7:8000',
+        baseUrl: 'http://localhost:8000',
         pusherKey: 'dba8be110fed62cabe69'
 
-        //baseUrl: 'http://localhost:8000'
-    }) // 192.168.0.6
-    .run(function ($ionicPlatform, $window, appConfig) {
+    }) // 192.168.0.6  192.168.122.1
+    .run(function ($ionicPlatform, $window, appConfig, $localStorage) {
         $window.client = new Pusher(appConfig.pusherKey);
 
         $ionicPlatform.ready(function () {
@@ -35,6 +34,16 @@ angular.module('starter', [
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
+            Ionic.io();
+            var push = new Ionic.Push({
+                debug: true,
+                onNotification: function(message){
+                    alert(message.text);
+                }
+            });
+            push.register(function(token){
+                $localStorage.set('device_token', token.token);
+            })
         });
     })
 
