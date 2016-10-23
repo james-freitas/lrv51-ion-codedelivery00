@@ -1,22 +1,28 @@
-// Ionic Starter App
+    // Ionic Starter App
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
+    // angular.module is a global place for creating, registering and retrieving Angular modules
+    // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+    // the 2nd parameter is an array of 'requires'
 
-angular.module('starter.controllers',[]);
-angular.module('starter.services',[]);
-angular.module('starter.filters', []);
+    angular.module('starter.controllers',[]);
+    angular.module('starter.services',[]);
+    angular.module('starter.filters', []);
+    angular.module('starter.run', []);
 
-angular.module('starter', [
-    'ionic','ionic.service.core', 'starter.controllers', 'starter.services','starter.filters',
-    'angular-oauth2', 'ngResource', 'ngCordova', 'uiGmapgoogle-maps', 'pusher-angular'
-])
-    .constant('appConfig', {
-        baseUrl: 'http://localhost:8000',
-        pusherKey: 'dba8be110fed62cabe69'
 
-    }) // 192.168.0.6  192.168.122.1
+    angular.module('starter', [
+        'ionic','ionic.service.core', 'starter.controllers', 'starter.services','starter.filters', 'starter.run',
+        'angular-oauth2', 'ngResource', 'ngCordova', 'uiGmapgoogle-maps', 'pusher-angular', 'permission'
+    ])
+        .constant('appConfig', {
+            baseUrl: 'http://localhost:8000',
+            pusherKey: 'dba8be110fed62cabe69',
+            redirectAfterLogin: {
+                client: 'client.order',
+                deliveryman: 'deliveryman.order'
+            }
+
+        }) // 192.168.0.6  192.168.122.1
     .run(function ($ionicPlatform, $window, appConfig, $localStorage) {
         $window.client = new Pusher(appConfig.pusherKey);
 
@@ -70,6 +76,11 @@ angular.module('starter', [
                 templateUrl: 'templates/login.html',
                 controller: 'LoginCtrl'
             })
+            .state('logout', {
+                url: '/logout',
+                controller: 'LogoutCtrl'
+            })
+
             .state('home', {
                 url: '/home',
                 templateUrl: 'templates/home.html',
@@ -83,7 +94,12 @@ angular.module('starter', [
                 cache: false,
                 url: '/client',
                 templateUrl: 'templates/client/menu.html',
-                controller: 'ClientMenuCtrl'
+                controller: 'ClientMenuCtrl',
+                data: {
+                    permissions: {
+                        only: ['client-role']
+                    }
+                }
             })
 
             .state('client.order', {
@@ -130,7 +146,12 @@ angular.module('starter', [
                 cache: false,
                 url: '/deliveryman',
                 templateUrl: 'templates/deliveryman/menu.html',
-                controller: 'DeliverymanMenuCtrl'
+                controller: 'DeliverymanMenuCtrl',
+                data: {
+                    permissions: {
+                        only: ['deliveryman-role']
+                    }
+                }
             })
             .state('deliveryman.order', {
                 url: '/order',
