@@ -1,4 +1,6 @@
-angular.module('starter.run').run(['PermissionStore', 'RoleStore', 'OAuth', 'UserData', function(PermissionStore, RoleStore, OAuth, UserData){
+angular.module('starter.run').run([
+    '$state', 'PermissionStore', 'RoleStore', 'OAuth', 'UserData', '$rootScope', 'authService', 'httpBuffer',
+    function($state, PermissionStore, RoleStore, OAuth, UserData, $rootScope, authService, httpBuffer){
     PermissionStore.definePermission('user-permission', function(){
         return OAuth.isAuthenticated();
     });
@@ -25,4 +27,27 @@ angular.module('starter.run').run(['PermissionStore', 'RoleStore', 'OAuth', 'Use
     });
     RoleStore.defineRole('deliveryman-role', ['user-permission', 'deliveryman-permission']);
 
+    $rootScope.$on('event:auth-loginRequired', function (event, data) {
+
+        switch (data.data.error){
+            case 'access_denied':
+                if(!$rootScope.refreshingToken){
+                    $rootScope.refreshingToken = OAuth.getRefreshToken();
+                }
+                $rootScope.refreshingToken.then(function (data) {
+                    authService.loginConfirmed();
+                    $rootScope.refreshingToken = null;
+                }, function (responseError) {
+                    $state.go('logout');
+                });
+                break;
+            case 'invalid_credentials':
+                httpBuffer.rejectAll(data);
+                break;
+            default:
+                $state.go('logout');
+                break;
+        }
+    });
 }]);
+

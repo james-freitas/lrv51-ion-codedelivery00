@@ -1,4 +1,12 @@
 {
   "name": "Code Deliverer",
-  "app_id": "15c1562d"
+  "app_id": "15c1562d",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }

@@ -10,9 +10,11 @@
     angular.module('starter.run', []);
 
 
+    //'ionic','ionic.service.core', 'starter.controllers', 'starter.services','starter.filters', 'starter.run',
+
     angular.module('starter', [
         'ionic','ionic.service.core', 'starter.controllers', 'starter.services','starter.filters', 'starter.run',
-        'angular-oauth2', 'ngResource', 'ngCordova', 'uiGmapgoogle-maps', 'pusher-angular', 'permission'
+        'angular-oauth2', 'ngResource', 'ngCordova', 'uiGmapgoogle-maps', 'pusher-angular', 'permission', 'http-auth-interceptor'
     ])
         .constant('appConfig', {
             baseUrl: 'http://localhost:8000',
@@ -22,7 +24,7 @@
                 deliveryman: 'deliveryman.order'
             }
 
-        }) // 192.168.0.6  192.168.122.1
+        }) // 192.168.0.6  192.168.122.1  http://104.131.84.69/
     .run(function ($ionicPlatform, $window, appConfig, $localStorage) {
         $window.client = new Pusher(appConfig.pusherKey);
 
@@ -102,6 +104,13 @@
                 }
             })
 
+            .state('client.touchid', {
+                url: '/touchid',
+                templateUrl: 'templates/touchid.html',
+                controller: 'TouchIDCtrl'
+            })
+
+
             .state('client.order', {
                 url: '/order',
                 templateUrl: 'templates/client/order.html',
@@ -153,6 +162,13 @@
                     }
                 }
             })
+
+            .state('deliveryman.touchid', {
+                url: '/touchid',
+                templateUrl: 'templates/touchid.html',
+                controller: 'TouchIDCtrl'
+            })
+
             .state('deliveryman.order', {
                 url: '/order',
                 templateUrl: 'templates/deliveryman/order.html',
@@ -199,5 +215,11 @@
             });
             return $delegate;
         }]);
+
+        $provide.decorator('oauthInterceptor', ['$delegate', function( $delegate){
+            delete $delegate['responseError'];
+            return $delegate;
+        }]);
+
     });
 
